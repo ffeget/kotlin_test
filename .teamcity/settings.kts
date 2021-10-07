@@ -29,6 +29,17 @@ project {
 
     buildType(FirstJob)
     buildType(SecondJob)
+    buildType(forJob)
+    buildType(thirdJob)
+
+    sequential  {
+      buildType(FirstJob)
+      parallel {
+        buildType(SecondJob)
+        buildType(thirdJob)
+      }
+      buildType(forJob)
+    }
 }
 
 object FirstJob : BuildType({
@@ -55,6 +66,34 @@ object SecondJob : BuildType({
     steps {
         script {
             scriptContent = "echo second"
+        }
+    }
+})
+
+object forJob : BuildType({
+    name = "for_job"
+
+    vcs {
+        root(DslContext.settingsRoot)
+    }
+
+    steps {
+        script {
+            scriptContent = "echo for"
+        }
+    }
+})
+
+object thirdJob : BuildType({
+    name = "third_job"
+
+    vcs {
+        root(DslContext.settingsRoot)
+    }
+
+    steps {
+        script {
+            scriptContent = "echo third"
         }
     }
 })
