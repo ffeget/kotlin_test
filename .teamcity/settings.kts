@@ -28,6 +28,7 @@ version = "2021.1"
 project {
 
     buildType(FirstJob)
+    buildType(SecondJob)
 }
 
 object FirstJob : BuildType({
@@ -40,6 +41,20 @@ object FirstJob : BuildType({
     steps {
         script {
             scriptContent = "echo first"
+        }
+    }
+})
+
+object SecondJob : BuildType({
+    name = "second_job"
+
+    vcs {
+        root(DslContext.settingsRoot)
+    }
+
+    steps {
+        script {
+            scriptContent = "echo second"
         }
     }
 })
