@@ -36,6 +36,8 @@ project {
       buildType(FirstJob)
       parallel {
         buildType(SecondJob)
+        buildType(SecondJob)
+        buildType(thirdJob)
         buildType(thirdJob)
       }
       buildType(forJob)
